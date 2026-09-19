@@ -56,6 +56,40 @@ st.markdown("""
     h1, h2, h3 {
         color: #0d47a1 !important;
     }
+
+    /* Texto principal: azul oscuro, siempre legible sobre el fondo */
+    [data-testid="stMain"] .stMarkdown p,
+    [data-testid="stMain"] .stMarkdown li,
+    [data-testid="stMain"] .stMarkdown span,
+    [data-testid="stMain"] label,
+    [data-testid="stMain"] .stCaption,
+    [data-testid="stMain"] [data-testid="stText"] {
+        color: #0d3b66 !important;
+    }
+
+    /* Alertas (éxito/error/advertencia/info): fondo blanco + texto oscuro */
+    div[data-testid="stNotification"] {
+        background-color: #ffffff !important;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(13, 59, 102, 0.18);
+    }
+    div[data-testid="stNotification"] * {
+        color: #16324f !important;
+    }
+
+    /* Borde lateral de color según el tipo de alerta */
+    div[data-testid="stNotification"]:has([data-testid="stNotificationContentSuccess"]) {
+        border-left: 6px solid #2e7d32;
+    }
+    div[data-testid="stNotification"]:has([data-testid="stNotificationContentError"]) {
+        border-left: 6px solid #c62828;
+    }
+    div[data-testid="stNotification"]:has([data-testid="stNotificationContentWarning"]) {
+        border-left: 6px solid #f9a825;
+    }
+    div[data-testid="stNotification"]:has([data-testid="stNotificationContentInfo"]) {
+        border-left: 6px solid #1565c0;
+    }
 </style>
 """, unsafe_allow_html=True)
 
