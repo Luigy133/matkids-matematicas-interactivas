@@ -124,6 +124,26 @@ st.markdown("""
         font-weight: 600;
     }
 
+    
+    /* Botones de enlace a las páginas (st.page_link) */
+    [data-testid="stPageLink"] a {
+        display: block;
+        text-align: center;
+        background-color: #1976d2;
+        color: #ffffff !important;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 0.55rem 1rem;
+        text-decoration: none;
+        transition: filter 0.2s ease;
+    }
+    [data-testid="stPageLink"] a:hover {
+        filter: brightness(0.88);
+    }
+    [data-testid="stPageLink"] a span {
+        color: #ffffff !important;
+    }
+
     /* Alerta legible */
     div[data-testid="stNotification"] {
         background-color: #ffffff !important;
@@ -141,7 +161,7 @@ st.markdown("""
 Tu portal interactivo para estudiantes de educación básica en Venezuela.</div>
 """, unsafe_allow_html=True)
 
-st.markdown('<p class="texto-seccion">🧭 Explora las materias desde el menú de la izquierda o elige una tarjeta:</p>',
+st.markdown('<p class="texto-seccion">🧭 Explora las materias desde el menú de la izquierda o con los botones de las tarjetas:</p>',
             unsafe_allow_html=True)
 
 # ============================================================
@@ -161,6 +181,14 @@ with fila1[0]:
         <span class="insignia disponible">✅ Disponible</span>
     </div>
     """, unsafe_allow_html=True)
+
+    # Botón que lleva a la página de la materia.
+    # Este enlace apunta a la portada de Aritmética.
+    # Si tu archivo tiene otro nombre, ajústalo aquí.
+    try:
+        st.page_link("pages/1_🧮_Aritmética.py", label="🧮 Ir a Aritmética ➜")
+    except Exception:
+        pass  # Si el archivo no existe todavía, no se muestra el botón
 
 with fila1[1]:
     st.markdown("""
