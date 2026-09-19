@@ -90,6 +90,68 @@ st.markdown("""
     div[data-testid="stNotification"]:has([data-testid="stNotificationContentInfo"]) {
         border-left: 6px solid #1565c0;
     }
+
+    /* Expander "¿Cómo funciona?": fondo blanco sólido y texto siempre visible */
+    div[data-testid="stExpander"] {
+        background-color: #ffffff !important;
+        border-radius: 12px;
+        border: 1px solid #90caf9;
+    }
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] p,
+    div[data-testid="stExpander"] li,
+    div[data-testid="stExpander"] span,
+    div[data-testid="stExpander"] strong {
+        color: #0d3b66 !important;
+    }
+    div[data-testid="stExpander"] summary {
+        font-weight: 700;
+        font-size: 1.05rem;
+    }
+    div[data-testid="stExpander"] h1,
+    div[data-testid="stExpander"] h2,
+    div[data-testid="stExpander"] h3 {
+        color: #0d47a1 !important;
+    }
+
+    /* Campo "Tu respuesta:": fondo blanco, texto azul oscuro y borde visible */
+    [data-testid="stNumberInput"] input {
+        background-color: #ffffff !important;
+        color: #0d3b66 !important;
+        font-weight: 700;
+        font-size: 1.2rem;
+        border: 2px solid #1976d2 !important;
+        border-radius: 10px;
+        padding: 0.5rem;
+    }
+    [data-testid="stNumberInput"] input::placeholder {
+        color: #90a4ae !important;
+        font-weight: 400;
+    }
+    [data-testid="stNumberInput"] input:focus {
+        border-color: #0d47a1 !important;
+        box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.25);
+    }
+    /* Etiqueta "Tu respuesta:" bien visible */
+    [data-testid="stNumberInput"] label {
+        color: #0d3b66 !important;
+        font-weight: 700;
+    }
+
+    /* Quitar la caja blanca del divisor y dejar una línea azul elegante */
+    div[data-testid="stVerticalBlock"] > div:has(> .stMarkdown > hr:only-child) {
+        background-color: transparent !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+    .stMarkdown hr {
+        border: none !important;
+        border-top: 3px solid #64b5f6 !important;
+        border-radius: 2px;
+        margin: 0.75rem 0;
+        opacity: 0.9;
+    }
 </style>
 """, unsafe_allow_html=True)
 
