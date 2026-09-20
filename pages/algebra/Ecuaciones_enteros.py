@@ -5,22 +5,28 @@ import matplotlib.pyplot as plt
 # ---------- Estilos personalizados: fondo morado suave ----------
 st.markdown("""
 <style>
+    /* Fondo principal */
     .stApp {
         background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 50%, #ede7f6 100%);
     }
+
+    /* Tarjetas/contenedores legibles */
     [data-testid="stVerticalBlock"] > div:has(.stMarkdown),
-    div[data-testid="stMetric"],
-    div[data-testid="stExpander"] {
+    div[data-testid="stMetric"] {
         background-color: rgba(255, 255, 255, 0.78);
         border-radius: 12px;
-        padding: 0.5rem 0.75rem;
+        padding: 0.75rem 1rem;
     }
+
+    /* Barra lateral */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #6a1b9a 0%, #8e24aa 100%);
     }
     section[data-testid="stSidebar"] * {
         color: #ffffff !important;
     }
+
+    /* Botones */
     div[data-testid="stButton"] > button {
         background-color: #8e24aa;
         color: white;
@@ -32,15 +38,72 @@ st.markdown("""
         background-color: #6a1b9a;
         color: white;
     }
-    /* Quitar fondo blanco alrededor de los botones */
     div[data-testid="stButton"] {
         background: transparent !important;
         box-shadow: none !important;
         padding: 0 !important;
     }
+
+    /* ---------- FORZAR COLOR DE TEXTO EN ZONAS BLANCAS ---------- */
+    /* Texto general dentro de la app (fuera del sidebar) */
+    .stApp p, .stApp li, .stApp span, .stApp label,
+    .stApp div[data-testid="stMarkdownContainer"] {
+        color: #4a148c;
+    }
+
+    /* Etiquetas de inputs (st.number_input, st.text_input, etc.) */
+    .stApp label,
+    div[data-testid="stWidgetLabel"] label,
+    div[data-testid="stWidgetLabel"] p {
+        color: #4a148c !important;
+        font-weight: 600;
+    }
+
+    /* Texto dentro del input */
     input {
         background-color: #ffffff !important;
+        color: #4a148c !important;
     }
+
+    /* Texto del expander (título y contenido) */
+    div[data-testid="stExpander"] {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        border-radius: 12px;
+        padding: 0.25rem 0.5rem;
+    }
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] summary *,
+    div[data-testid="stExpander"] p,
+    div[data-testid="stExpander"] li,
+    div[data-testid="stExpander"] span,
+    div[data-testid="stExpander"] h1,
+    div[data-testid="stExpander"] h2,
+    div[data-testid="stExpander"] h3,
+    div[data-testid="stExpander"] strong,
+    div[data-testid="stExpander"] em,
+    div[data-testid="stExpander"] code,
+    div[data-testid="stExpander"] blockquote {
+        color: #4a148c !important;
+    }
+
+    /* Texto de tablas dentro de expanders */
+    div[data-testid="stExpander"] table,
+    div[data-testid="stExpander"] th,
+    div[data-testid="stExpander"] td {
+        color: #4a148c !important;
+        border-color: #8e24aa !important;
+    }
+    div[data-testid="stExpander"] th {
+        background-color: #e1bee7 !important;
+    }
+
+    /* Alertas (st.info, st.warning, st.success, st.error) */
+    div[data-testid="stAlert"] p,
+    div[data-testid="stAlert"] div {
+        color: #4a148c !important;
+    }
+
+    /* Títulos */
     h1, h2, h3 {
         color: #4a148c !important;
     }
@@ -58,12 +121,22 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---------- Descripción con color legible ----------
+# ---------- Cambio 1: descripción más amplia y justificada ----------
 st.markdown("""
-<div style="color: #4a148c; font-size: 1.05rem; line-height: 1.6;">
+<div style="
+    color: #4a148c;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    text-align: justify;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 1.25rem 1.75rem;
+    border-radius: 14px;
+    margin: 1rem 0 1.5rem 0;
+    box-shadow: 0 2px 6px rgba(142, 36, 170, 0.12);
+">
 Aprende a <b>resolver ecuaciones</b> con números enteros usando la recta numérica.
 El objetivo es encontrar el valor de <b>x</b> que hace verdadera la igualdad:
-<ul>
+<ul style="margin-top: 0.6rem; margin-bottom: 0.6rem;">
   <li><b>x + a = b</b> → despejas restando <i>a</i> en ambos lados</li>
   <li><b>x − a = b</b> → despejas sumando <i>a</i> en ambos lados</li>
   <li><b>a + x = b</b> → igual que el primer caso</li>
@@ -95,7 +168,7 @@ with st.sidebar:
 
     nivel = st.radio(
         "Dificultad:",
-        ["Fácil", "Medio", "Avanzado"]
+        ["Fácil (solo positivos)", "Medio (con negativos)", "Difícil (mezclado)"]
     )
 
     st.header("📊 Tu progreso")
@@ -245,8 +318,7 @@ def dibujar_recta_ecuacion(x_sol, a, b, tipo, mostrar_resultado=False):
                     f'x = a − b = {a} − ({b}) = {x_sol}',
                     ha='center', fontsize=9, color=color)
 
-    # ✅ Cambio 4: sin título largo, solo la etiqueta del eje
-    ax.set_xlabel("Recta numérica", fontsize=11, color='#4a148c')
+    # ---------- Cambio 2: se eliminó ax.set_xlabel("Recta numérica") ----------
     ax.set_yticks([])
     ax.legend(loc='upper right', fontsize=9)
     ax.grid(True, alpha=0.3, axis='x')
@@ -262,14 +334,14 @@ def nueva_ecuacion():
     st.session_state.mostrar_solucion = False
 
 
-# ---------- Botón nuevo problema (centrado y más compacto) ----------
+# ---------- Botón nuevo problema ----------
 col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
 with col_btn2:
     if st.button("🎲 Nueva ecuación", use_container_width=True):
         nueva_ecuacion()
         st.rerun()
 
-# ✅ Cambio 3: separador morado elegante en lugar del recuadro blanco
+# Separador morado elegante
 st.markdown("""
 <hr style="
     border: none;
@@ -302,6 +374,7 @@ if st.session_state.problema_actual:
     st.pyplot(fig)
     plt.close(fig)
 
+    # ---------- Cambio 3: label del input en morado (forzado en CSS) ----------
     respuesta = st.number_input(
         "Tu respuesta (valor de x):",
         value=None,
@@ -368,49 +441,73 @@ if st.session_state.problema_actual:
 
             st.info("💡 **Recuerda:** resolver una ecuación es encontrar el valor de **x** que hace verdadera la igualdad. Lo que haces de un lado, lo haces del otro (propiedad de la igualdad).")
 
-# ---------- Sección de ayuda ----------
+# ---------- Cambios 4 y 5: color forzado dentro del expander de ayuda ----------
 with st.expander("📚 ¿Cómo resolver ecuaciones con enteros? (Haz clic para aprender)"):
     st.markdown("""
-    ### Reglas básicas para resolver ecuaciones con números enteros
+    <div style="color: #4a148c; line-height: 1.7;">
 
-    Una **ecuación** es una igualdad donde hay un valor desconocido llamado **incógnita** (generalmente **x**).
-    Resolverla significa encontrar el valor de **x** que hace verdadera la igualdad.
+    <h3 style="color: #4a148c !important;">Reglas básicas para resolver ecuaciones con números enteros</h3>
 
-    ---
+    Una <b>ecuación</b> es una igualdad donde hay un valor desconocido llamado <b>incógnita</b> (generalmente <b>x</b>).
+    Resolverla significa encontrar el valor de <b>x</b> que hace verdadera la igualdad.
 
-    #### 🔹 Tipos comunes de ecuaciones
+    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
 
-    | Ecuación | ¿Cómo despejar? | Ejemplo |
-    |----------|-----------------|---------|
-    | x + a = b | Restar **a** en ambos lados → x = b − a | x + 3 = 8 → x = 8 − 3 = **5** |
-    | x − a = b | Sumar **a** en ambos lados → x = b + a | x − 4 = 2 → x = 2 + 4 = **6** |
-    | a + x = b | Igual que el primero → x = b − a | 7 + x = 10 → x = 10 − 7 = **3** |
-    | a − x = b | x = a − b | 9 − x = 4 → x = 9 − 4 = **5** |
+    <h4 style="color: #4a148c !important;">🔹 Tipos comunes de ecuaciones</h4>
 
-    ---
+    <table style="width: 100%; border-collapse: collapse; color: #4a148c;">
+      <tr style="background-color: #e1bee7;">
+        <th style="padding: 8px; border: 1px solid #8e24aa; text-align: left;">Ecuación</th>
+        <th style="padding: 8px; border: 1px solid #8e24aa; text-align: left;">¿Cómo despejar?</th>
+        <th style="padding: 8px; border: 1px solid #8e24aa; text-align: left;">Ejemplo</th>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">x + a = b</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">Restar <b>a</b> en ambos lados → x = b − a</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">x + 3 = 8 → x = 8 − 3 = <b>5</b></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">x − a = b</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">Sumar <b>a</b> en ambos lados → x = b + a</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">x − 4 = 2 → x = 2 + 4 = <b>6</b></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">a + x = b</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">Igual que el primero → x = b − a</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">7 + x = 10 → x = 10 − 7 = <b>3</b></td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">a − x = b</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">x = a − b</td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">9 − x = 4 → x = 9 − 4 = <b>5</b></td>
+      </tr>
+    </table>
 
-    #### 🔹 Con números negativos
+    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
 
-    - `x + (−3) = 5` → **x = 5 − (−3) = 5 + 3 = 8**
-    - `x − (−2) = 1` → **x = 1 + (−2) = −1**
-    - `−4 + x = −10` → **x = −10 − (−4) = −10 + 4 = −6**
-    - `−5 − x = 2` → **x = −5 − 2 = −7**
+    <h4 style="color: #4a148c !important;">🔹 Con números negativos</h4>
+    <ul>
+      <li><code>x + (−3) = 5</code> → <b>x = 5 − (−3) = 5 + 3 = 8</b></li>
+      <li><code>x − (−2) = 1</code> → <b>x = 1 + (−2) = −1</b></li>
+      <li><code>−4 + x = −10</code> → <b>x = −10 − (−4) = −10 + 4 = −6</b></li>
+      <li><code>−5 − x = 2</code> → <b>x = −5 − 2 = −7</b></li>
+    </ul>
 
-    ---
+    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
 
-    #### 🔹 La regla de oro
+    <h4 style="color: #4a148c !important;">🔹 La regla de oro</h4>
+    <blockquote style="border-left: 4px solid #8e24aa; padding-left: 12px; color: #4a148c;">
+      <b>Lo que sumas o restas de un lado de la ecuación, debes hacerlo también del otro lado.</b><br>
+      Así se mantiene el equilibrio de la balanza. ⚖️
+    </blockquote>
 
-    > **Lo que sumas o restas de un lado de la ecuación, debes hacerlo también del otro lado.**
+    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
 
-    Así se mantiene el equilibrio de la balanza. ⚖️
+    <h4 style="color: #4a148c !important;">🔹 Verificación</h4>
+    Siempre puedes <b>verificar</b> tu solución: reemplaza <b>x</b> en la ecuación original
+    y comprueba que ambos lados sean iguales.<br><br>
+    Ejemplo: si resolviste <code>x + 3 = 8</code> y obtuviste <code>x = 5</code>:<br>
+    <code>5 + 3 = 8</code> ✅ ¡Correcto!
 
-    ---
-
-    #### 🔹 Verificación
-
-    Siempre puedes **verificar** tu solución: reemplaza **x** en la ecuación original
-    y comprueba que ambos lados sean iguales.
-
-    Ejemplo: si resolviste `x + 3 = 8` y obtuviste `x = 5`:
-    `5 + 3 = 8` ✅ ¡Correcto!
-    """)
+    </div>
+    """, unsafe_allow_html=True)
