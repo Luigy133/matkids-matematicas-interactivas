@@ -281,7 +281,7 @@ def generar_ecuacion(rango, nivel):
     }
 
 
-    def dibujar_recta_ecuacion(x_sol, a, b, tipo, mostrar_resultado=False):
+def dibujar_recta_ecuacion(x_sol, a, b, tipo, mostrar_resultado=False):
     """Visualiza la ecuación en la recta numérica."""
     fig, ax = plt.subplots(figsize=(10, 3.2))
     fig.patch.set_facecolor('#f3e5f5')
