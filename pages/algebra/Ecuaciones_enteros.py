@@ -95,7 +95,7 @@ with st.sidebar:
 
     nivel = st.radio(
         "Dificultad:",
-        ["Fácil (solo positivos)", "Medio (con negativos)", "Difícil (mezclado)"]
+        ["Fácil", "Medio", "Avanzado"]
     )
 
     st.header("📊 Tu progreso")
@@ -369,6 +369,7 @@ if st.session_state.problema_actual:
             st.info("💡 **Recuerda:** resolver una ecuación es encontrar el valor de **x** que hace verdadera la igualdad. Lo que haces de un lado, lo haces del otro (propiedad de la igualdad).")
 
 # ---------- Sección de ayuda ----------
+<div style="color: #4a148c; font-size: 1.05rem; line-height: 1.6;">
 with st.expander("📚 ¿Cómo resolver ecuaciones con enteros? (Haz clic para aprender)"):
     st.markdown("""
     ### Reglas básicas para resolver ecuaciones con números enteros
