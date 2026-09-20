@@ -676,4 +676,8 @@ with st.expander("📚 ¿Cómo resolver ecuaciones con enteros? (Haz clic para a
 
     <h4 style="color: #4a148c !important;">🔹 Verificación</h4>
     Reemplaza <b>x</b> en la ecuación original y comprueba que ambos lados sean iguales.<br><br>
-    Ej
+    Ejemplo: si resolviste <code>x + 3 = 8</code> y obtuviste <code>x = 5</code>:<br>
+    <code>5 + 3 = 8</code> ✅ ¡Correcto!
+
+    </div>
+    """, unsafe_allow_html=True)
