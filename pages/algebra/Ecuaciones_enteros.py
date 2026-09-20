@@ -201,7 +201,7 @@ with st.sidebar:
 
     rango = st.slider(
         "Rango de números:",
-        min_value=1, max_value=20, value=10,
+        min_value=1, max_value=50, value=10,
         help="Los números estarán entre -rango y +rango"
     )
 
