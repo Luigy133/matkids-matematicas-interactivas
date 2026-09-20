@@ -32,11 +32,11 @@ pg = st.navigation({
         st.Page("pages/aritmetica/Enteros.py", title="Enteros", icon="1️⃣"),
         # Cuando crees Racionales.py, descomenta la siguiente línea:
         # st.Page("pages/aritmetica/Racionales.py", title="Racionales", icon="2️⃣"),
+     ],
+    "Álgebra": [
+        st.Page("pages/algebra/Algebra.py", title="Álgebra", icon="🧠"),
+        st.Page("pages/algebra/Ecuaciones_enteros.py", title="Ecuaciones con Enteros", icon="🧮"),
     ],
-    # Plantilla para el futuro — copia y adapta:
-    # "📐 Geometría": [
-    #     st.Page("pages/geometria/Geometria.py", title="Portada", icon="📐"),
-    # ],
 })
 
 # Ejecuta la página seleccionada
