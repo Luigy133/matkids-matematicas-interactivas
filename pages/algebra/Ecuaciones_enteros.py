@@ -32,6 +32,12 @@ st.markdown("""
         background-color: #6a1b9a;
         color: white;
     }
+    /* Quitar fondo blanco alrededor de los botones */
+    div[data-testid="stButton"] {
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
     input {
         background-color: #ffffff !important;
     }
@@ -44,19 +50,28 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- Título y descripción ----------
-st.title("🧮 Ecuaciones con Números Enteros")
+# ---------- Título centrado en una línea ----------
+st.markdown(
+    "<h1 style='text-align: center; font-size: 2rem; color: #4a148c; margin-bottom: 0.5rem;'>"
+    "🧮 Ecuaciones con Números Enteros"
+    "</h1>",
+    unsafe_allow_html=True
+)
+
+# ---------- Descripción con color legible ----------
 st.markdown("""
-Aprende a **resolver ecuaciones** con números enteros usando la recta numérica.
-El objetivo es encontrar el valor de **x** que hace verdadera la igualdad:
-
-- **x + a = b** → despejas restando *a* en ambos lados
-- **x − a = b** → despejas sumando *a* en ambos lados
-- **a + x = b** → igual que el primer caso
-- **a − x = b** → ¡cuidado con el signo de x!
-
-Cada solución la **visualizamos** en la recta numérica para que comprendas el porqué. 🎯
-""")
+<div style="color: #4a148c; font-size: 1.05rem; line-height: 1.6;">
+Aprende a <b>resolver ecuaciones</b> con números enteros usando la recta numérica.
+El objetivo es encontrar el valor de <b>x</b> que hace verdadera la igualdad:
+<ul>
+  <li><b>x + a = b</b> → despejas restando <i>a</i> en ambos lados</li>
+  <li><b>x − a = b</b> → despejas sumando <i>a</i> en ambos lados</li>
+  <li><b>a + x = b</b> → igual que el primer caso</li>
+  <li><b>a − x = b</b> → ¡cuidado con el signo de x!</li>
+</ul>
+Cada solución la <b>visualizamos</b> en la recta numérica para que comprendas el porqué. 🎯
+</div>
+""", unsafe_allow_html=True)
 
 # ---------- Inicializar variables de sesión ----------
 if 'puntos' not in st.session_state:
@@ -230,8 +245,8 @@ def dibujar_recta_ecuacion(x_sol, a, b, tipo, mostrar_resultado=False):
                     f'x = a − b = {a} − ({b}) = {x_sol}',
                     ha='center', fontsize=9, color=color)
 
-    ax.set_title("Resuelve la ecuación en la recta numérica", fontsize=13, color='#4a148c')
-    ax.set_xlabel("Recta numérica", fontsize=11)
+    # ✅ Cambio 4: sin título largo, solo la etiqueta del eje
+    ax.set_xlabel("Recta numérica", fontsize=11, color='#4a148c')
     ax.set_yticks([])
     ax.legend(loc='upper right', fontsize=9)
     ax.grid(True, alpha=0.3, axis='x')
@@ -247,17 +262,28 @@ def nueva_ecuacion():
     st.session_state.mostrar_solucion = False
 
 
-# ---------- Botón nuevo problema ----------
-if st.button("🎲 Nueva ecuación", use_container_width=True):
-    nueva_ecuacion()
-    st.rerun()
+# ---------- Botón nuevo problema (centrado y más compacto) ----------
+col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
+with col_btn2:
+    if st.button("🎲 Nueva ecuación", use_container_width=True):
+        nueva_ecuacion()
+        st.rerun()
+
+# ✅ Cambio 3: separador morado elegante en lugar del recuadro blanco
+st.markdown("""
+<hr style="
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #8e24aa 50%, transparent 100%);
+    margin: 1.5rem 0;
+    border-radius: 2px;
+">
+""", unsafe_allow_html=True)
 
 # ---------- Mostrar problema activo ----------
 if st.session_state.problema_actual:
     problema = st.session_state.problema_actual
     mostrar = st.session_state.mostrar_solucion
-
-    st.markdown("---")
 
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
