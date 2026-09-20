@@ -166,9 +166,9 @@ with st.sidebar:
         help="Los números estarán entre -rango y +rango"
     )
 
-    nivel = st.radio(
+       nivel = st.radio(
         "Dificultad:",
-        ["Fácil (solo positivos)", "Medio (con negativos)", "Difícil (mezclado)"]
+        ["Fácil", "Medio", "Difícil"]
     )
 
     st.header("📊 Tu progreso")
