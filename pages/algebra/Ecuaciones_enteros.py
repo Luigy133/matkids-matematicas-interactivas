@@ -190,7 +190,7 @@ with st.sidebar:
 def generar_ecuacion(rango, nivel):
     """Genera una ecuación del tipo x+a=b, x-a=b, a+x=b, a-x=b."""
 
-    if nivel == "Fácil (solo positivos)":
+    if nivel == "Fácil":
         x = random.randint(1, rango)
         a = random.randint(1, rango)
         tipo = random.choice(['x+a=b', 'x-a=b', 'a+x=b', 'a-x=b'])
@@ -206,7 +206,7 @@ def generar_ecuacion(rango, nivel):
             tipo = 'x+a=b'
             b = x + a
 
-    elif nivel == "Medio (con negativos)":
+    elif nivel == "Medio":
         x = random.randint(-rango, rango)
         a = random.randint(-rango, rango)
         tipo = random.choice(['x+a=b', 'x-a=b', 'a+x=b', 'a-x=b'])
