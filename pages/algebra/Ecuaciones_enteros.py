@@ -170,13 +170,15 @@ st.markdown("""
     box-shadow: 0 2px 6px rgba(142, 36, 170, 0.12);
 ">
 Aprende a <b>resolver ecuaciones en ℤ</b> (números enteros) paso a paso.
-Todas las soluciones son <b>enteras por construcción</b>, así no necesitas
-conocer fracciones todavía. 🎯
+Todas las soluciones son <b>enteras por construcción</b>.🎯 
 
 <ul style="margin-top: 0.6rem; margin-bottom: 0.6rem;">
-  <li><b>Fácil</b>: la incógnita aparece sola → <code>x + a = b</code>, <code>x − a = b</code>, <code>a + x = b</code>, <code>a − x = b</code></li>
-  <li><b>Medio</b>: la incógnita tiene coeficiente → <code>ax + b = c</code>, <code>ax − b = c</code>, <code>b + ax = c</code>, <code>b − ax = c</code></li>
-  <li><b>Avanzado</b>: la incógnita aparece en ambos lados → <code>ax + b = cx + d</code> y todas sus variantes de signos</li>
+  <li><b>Fácil</b>: la incógnita aparece sola → 
+  <code>x + a = b</code>, <code>x − a = b</code>, <code>a + x = b</code>, <code>a − x = b</code></li>
+  <li><b>Medio</b>: la incógnita tiene coeficiente → 
+  <code>ax + b = c</code>, <code>ax − b = c</code>, <code>b + ax = c</code>, <code>b − ax = c</code></li>
+  <li><b>Avanzado</b>: la incógnita aparece en ambos lados → 
+  <code>ax + b = cx + d</code> y todas sus variantes de signos</li>
 </ul>
 </div>
 """, unsafe_allow_html=True)
@@ -660,7 +662,6 @@ with st.expander("📚 ¿Cómo resolver ecuaciones con enteros? (Haz clic para a
     <b>Paso 3:</b> divide entre el coeficiente de x.<br><br>
 
     Ejemplo: 
-    
     → <code>3x + 5 = −2x − 10</code><br>
     → <code>3x + 2x = −10 − 5</code><br>
     → <code>5x = −15</code><br>
