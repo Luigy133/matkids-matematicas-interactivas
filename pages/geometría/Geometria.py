@@ -6,7 +6,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# ---------- Estilos morados (coherentes con tus páginas) ----------
+# ---------- Estilos morados ----------
 st.markdown("""
 <style>
     .stApp {
@@ -14,17 +14,6 @@ st.markdown("""
     }
     h1, h2, h3 {
         color: #4a148c !important;
-    }
-    div[data-testid="stButton"] > button {
-        background-color: #8e24aa;
-        color: white;
-        border-radius: 10px;
-        border: none;
-        font-weight: 600;
-    }
-    div[data-testid="stButton"] > button:hover {
-        background-color: #6a1b9a;
-        color: white;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -41,7 +30,4 @@ Aquí encontrarás temas como:
 """)
 
 st.markdown("---")
-st.subheader("📚 Temas disponibles")
-
-# Enlaces a las páginas internas (usa rutas relativas al archivo pages/)
-st.page_link("pages/geometria/Ecuaciones_enteros.py", label="🧮 Ecuaciones con Enteros", icon="🧮")
+st.info("👈 Usa el menú lateral para navegar entre los temas de esta sección.")
