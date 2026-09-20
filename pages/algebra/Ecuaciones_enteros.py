@@ -320,15 +320,7 @@ if st.session_state.problema_actual:
         else:
             st.markdown(f"## **{problema['texto']}**  →  **x = ?**")
 
-    fig = dibujar_recta_ecuacion(
-        x_sol=problema['x'],
-        a=problema['a'],
-        b=problema['b'],
-        tipo=problema['tipo'],
-        mostrar_resultado=mostrar
-    )
-    st.pyplot(fig)
-    plt.close(fig)
+  
 
     # ---------- Cambio 3: label del input en morado (forzado en CSS) ----------
     respuesta = st.number_input(
