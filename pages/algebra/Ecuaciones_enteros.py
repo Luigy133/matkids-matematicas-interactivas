@@ -659,7 +659,8 @@ with st.expander("📚 ¿Cómo resolver ecuaciones con enteros? (Haz clic para a
     <b>Paso 2:</b> simplifica ambos lados.<br>
     <b>Paso 3:</b> divide entre el coeficiente de x.<br><br>
 
-    Ejemplo: <code>3x + 5 = −2x − 10</code><br>
+    Ejemplo: 
+    → <code>3x + 5 = −2x − 10</code><br>
     → <code>3x + 2x = −10 − 5</code><br>
     → <code>5x = −15</code><br>
     → <code>x = −15 ÷ 5 = −3</code>
