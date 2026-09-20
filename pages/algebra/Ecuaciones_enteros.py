@@ -45,13 +45,12 @@ st.markdown("""
     }
 
     /* ---------- FORZAR COLOR DE TEXTO EN ZONAS BLANCAS ---------- */
-    /* Texto general dentro de la app (fuera del sidebar) */
     .stApp p, .stApp li, .stApp span, .stApp label,
     .stApp div[data-testid="stMarkdownContainer"] {
         color: #4a148c;
     }
 
-    /* Etiquetas de inputs (st.number_input, st.text_input, etc.) */
+    /* Etiquetas de inputs */
     .stApp label,
     div[data-testid="stWidgetLabel"] label,
     div[data-testid="stWidgetLabel"] p {
@@ -65,11 +64,12 @@ st.markdown("""
         color: #4a148c !important;
     }
 
-    /* Texto del expander (título y contenido) */
+    /* ---------- EXPANDER: contenedor y texto ---------- */
     div[data-testid="stExpander"] {
         background-color: rgba(255, 255, 255, 0.85) !important;
         border-radius: 12px;
         padding: 0.25rem 0.5rem;
+        border: 1px solid #ce93d8 !important;
     }
     div[data-testid="stExpander"] summary,
     div[data-testid="stExpander"] summary *,
@@ -79,14 +79,14 @@ st.markdown("""
     div[data-testid="stExpander"] h1,
     div[data-testid="stExpander"] h2,
     div[data-testid="stExpander"] h3,
+    div[data-testid="stExpander"] h4,
     div[data-testid="stExpander"] strong,
     div[data-testid="stExpander"] em,
-    div[data-testid="stExpander"] code,
     div[data-testid="stExpander"] blockquote {
         color: #4a148c !important;
     }
 
-    /* Texto de tablas dentro de expanders */
+    /* Tablas dentro de expanders */
     div[data-testid="stExpander"] table,
     div[data-testid="stExpander"] th,
     div[data-testid="stExpander"] td {
@@ -95,6 +95,46 @@ st.markdown("""
     }
     div[data-testid="stExpander"] th {
         background-color: #e1bee7 !important;
+    }
+
+    /* ---------- CORREGIR FONDOS NEGROS EN EXPANDERS Y CÓDIGO ---------- */
+
+    /* 1) Fondo del summary (título del expander) en cualquier estado */
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] summary:hover,
+    div[data-testid="stExpander"] details[open] summary,
+    div[data-testid="stExpander"] details summary:focus {
+        background-color: #f3e5f5 !important;
+        color: #4a148c !important;
+        border-radius: 10px !important;
+    }
+    div[data-testid="stExpander"] details,
+    div[data-testid="stExpander"] details[open] {
+        background-color: #faf0fb !important;
+    }
+
+    /* 2) Código inline `<code>` (las ecuaciones entre comillas invertidas) */
+    div[data-testid="stExpander"] code,
+    .stApp code {
+        background-color: #ede7f6 !important;
+        color: #6a1b9a !important;
+        padding: 2px 6px !important;
+        border-radius: 6px !important;
+        border: 1px solid #ce93d8 !important;
+    }
+
+    /* 3) Bloque de código preformateado `<pre>` */
+    div[data-testid="stExpander"] pre,
+    .stApp pre {
+        background-color: #ede7f6 !important;
+        color: #4a148c !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 0.75rem !important;
+    }
+
+    /* 4) Contenedor interno del expander cuando está abierto */
+    div[data-testid="stExpander"] > details > div {
+        background-color: #faf0fb !important;
     }
 
     /* Alertas (st.info, st.warning, st.success, st.error) */
@@ -112,7 +152,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
 # ---------- Título centrado en una línea ----------
 st.markdown(
     "<h1 style='text-align: center; font-size: 2rem; color: #4a148c; margin-bottom: 0.5rem;'>"
