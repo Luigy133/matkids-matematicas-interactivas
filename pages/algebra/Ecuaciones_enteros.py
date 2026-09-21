@@ -1,31 +1,26 @@
 import streamlit as st
 import random
 
-# ---------- Estilos personalizados: fondo morado suave ----------
+# ============================================================
+#  ESTILOS (iguales que tenías: fondo morado suave)
+# ============================================================
 st.markdown("""
 <style>
-    /* Fondo principal */
     .stApp {
         background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 50%, #ede7f6 100%);
     }
-
-    /* Tarjetas/contenedores legibles */
     [data-testid="stVerticalBlock"] > div:has(.stMarkdown),
     div[data-testid="stMetric"] {
         background-color: rgba(255, 255, 255, 0.78);
         border-radius: 12px;
         padding: 0.75rem 1rem;
     }
-
-    /* Barra lateral */
     section[data-testid="stSidebar"] {
         background: linear-gradient(180deg, #6a1b9a 0%, #8e24aa 100%);
     }
     section[data-testid="stSidebar"] * {
         color: #ffffff !important;
     }
-
-    /* Botones */
     div[data-testid="stButton"] > button {
         background-color: #8e24aa;
         color: white;
@@ -42,28 +37,20 @@ st.markdown("""
         box-shadow: none !important;
         padding: 0 !important;
     }
-
-    /* ---------- FORZAR COLOR DE TEXTO EN ZONAS BLANCAS ---------- */
     .stApp p, .stApp li, .stApp span, .stApp label,
     .stApp div[data-testid="stMarkdownContainer"] {
         color: #4a148c;
     }
-
-    /* Etiquetas de inputs */
     .stApp label,
     div[data-testid="stWidgetLabel"] label,
     div[data-testid="stWidgetLabel"] p {
         color: #4a148c !important;
         font-weight: 600;
     }
-
-    /* Texto dentro del input */
     input {
         background-color: #ffffff !important;
         color: #4a148c !important;
     }
-
-    /* ---------- EXPANDER: contenedor y texto ---------- */
     div[data-testid="stExpander"] {
         background-color: rgba(255, 255, 255, 0.85) !important;
         border-radius: 12px;
@@ -84,8 +71,6 @@ st.markdown("""
     div[data-testid="stExpander"] blockquote {
         color: #4a148c !important;
     }
-
-    /* Tablas dentro de expanders */
     div[data-testid="stExpander"] table,
     div[data-testid="stExpander"] th,
     div[data-testid="stExpander"] td {
@@ -95,9 +80,6 @@ st.markdown("""
     div[data-testid="stExpander"] th {
         background-color: #e1bee7 !important;
     }
-
-    /* ---------- CORREGIR FONDOS NEGROS EN EXPANDERS Y CÓDIGO ---------- */
-
     div[data-testid="stExpander"] summary,
     div[data-testid="stExpander"] summary:hover,
     div[data-testid="stExpander"] details[open] summary,
@@ -110,7 +92,6 @@ st.markdown("""
     div[data-testid="stExpander"] details[open] {
         background-color: #faf0fb !important;
     }
-
     div[data-testid="stExpander"] code,
     .stApp code {
         background-color: #ede7f6 !important;
@@ -119,7 +100,6 @@ st.markdown("""
         border-radius: 6px !important;
         border: 1px solid #ce93d8 !important;
     }
-
     div[data-testid="stExpander"] pre,
     .stApp pre {
         background-color: #ede7f6 !important;
@@ -127,28 +107,45 @@ st.markdown("""
         border-radius: 8px !important;
         padding: 0.5rem 0.75rem !important;
     }
-
     div[data-testid="stExpander"] > details > div {
         background-color: #faf0fb !important;
     }
-
-    /* Alertas */
     div[data-testid="stAlert"] p,
     div[data-testid="stAlert"] div {
         color: #4a148c !important;
     }
-
-    /* Títulos */
     h1, h2, h3 {
         color: #4a148c !important;
     }
     div[data-testid="stMetric"] label {
         color: #4a148c !important;
     }
+
+    /* ---------- Tarjetas de niveles ---------- */
+    .nivel-card {
+        background-color: #ffffff;
+        border-radius: 14px;
+        padding: 1rem 1rem;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(142, 36, 170, 0.12);
+        border-top: 6px solid #8e24aa;
+        margin-bottom: 1rem;
+        height: 100%;
+    }
+    .nivel-card h4 { margin: 0.3rem 0; font-size: 1.1rem; }
+    .nivel-card p { font-size: 0.9rem; margin: 0.25rem 0; }
+    .nivel-facil    { border-top-color: #43a047; }
+    .nivel-facil h4    { color: #2e7d32 !important; }
+    .nivel-medio    { border-top-color: #f9a825; }
+    .nivel-medio h4    { color: #ef6c00 !important; }
+    .nivel-avanzado { border-top-color: #e53935; }
+    .nivel-avanzado h4 { color: #c62828 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# ---------- Título centrado en una línea ----------
+# ============================================================
+#  1. TÍTULO CENTRADO
+# ============================================================
 st.markdown(
     "<h1 style='text-align: center; font-size: 2rem; color: #4a148c; margin-bottom: 0.5rem;'>"
     "🧮 Ecuaciones de 1er Grado con Números Enteros"
@@ -156,57 +153,104 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---------- Descripción ----------
+# ============================================================
+#  2. TARJETA DE EXPLICACIÓN (solo teoría)
+# ============================================================
 st.markdown("""
 <div style="
     color: #4a148c;
     font-size: 1.05rem;
     line-height: 1.75;
-    text-align: justify;
     background-color: rgba(255, 255, 255, 0.85);
     padding: 1.25rem 1.75rem;
     border-radius: 14px;
     margin: 1rem 0 1.5rem 0;
     box-shadow: 0 2px 6px rgba(142, 36, 170, 0.12);
 ">
-Aprende a <b>resolver ecuaciones en ℤ</b> (Números Enteros) Paso a Paso.
-Una ecuación es una igualdad algebraica en la que aparecen letras (incógnitas) con valor
-desconocido.
-• El grado de una ecuación viene dado por el exponente mayor de la incógnita. En este tema
-trabajamos con ecuaciones lineales (de grado 1) con una incógnita.
-• Solucionar una ecuación es encontrar el valor o valores de las incógnitas que transforman la
-ecuación en una identidad.🎯 
-
-<ul style="margin-top: 0.6rem; margin-bottom: 0.6rem;">
-  <li><b>Fácil</b>: la incógnita aparece sola → 
-  <code>x + a = b</code>, <code>x − a = b</code>, <code>a + x = b</code>, <code>a − x = b</code></li>
-  <li><b>Medio</b>: la incógnita tiene coeficiente → 
-  <code>ax + b = c</code>, <code>ax − b = c</code>, <code>b + ax = c</code>, <code>b − ax = c</code></li>
-  <li><b>Avanzado</b>: la incógnita aparece en ambos lados → 
-  <code>ax + b = cx + d</code> y todas sus variantes de signos</li>
+<b>Aprende a resolver ecuaciones en ℤ</b> (Números Enteros) paso a paso. 🎯
+<ul style="margin: 0.6rem 0 0.2rem 0; padding-left: 1.4rem;">
+  <li>Una <b>ecuación</b> es una igualdad algebraica en la que aparecen letras
+  (<b>incógnitas</b>) con valor desconocido.</li>
+  <li>El <b>grado</b> de una ecuación viene dado por el exponente mayor de la incógnita.
+  En este tema trabajamos con ecuaciones <b>lineales (de grado 1)</b> con una incógnita.</li>
+  <li><b>Solucionar</b> una ecuación es encontrar el valor de la incógnita que transforma
+  la ecuación en una identidad.</li>
 </ul>
 </div>
 """, unsafe_allow_html=True)
 
-# ---------- Inicializar variables de sesión ----------
-if 'puntos' not in st.session_state:
-    st.session_state.puntos = 0
-if 'total_intentos' not in st.session_state:
-    st.session_state.total_intentos = 0
-if 'problema_actual' not in st.session_state:
-    st.session_state.problema_actual = None
-if 'mostrar_solucion' not in st.session_state:
-    st.session_state.mostrar_solucion = False
+# ============================================================
+#  3. TARJETAS DE LOS 3 NIVELES
+# ============================================================
+c1, c2, c3 = st.columns(3)
 
+with c1:
+    st.markdown("""
+    <div class="nivel-card nivel-facil">
+        <div style="font-size:2rem;">🟢</div>
+        <h4>Fácil</h4>
+        <p>La incógnita aparece sola:</p>
+        <p><code>x + a = b</code></p>
+        <p>Ejemplo: <code>x + 3 = 8</code> → <b>x = 5</b></p>
+    </div>
+    """, unsafe_allow_html=True)
 
-# ---------- Configuración en barra lateral ----------
+with c2:
+    st.markdown("""
+    <div class="nivel-card nivel-medio">
+        <div style="font-size:2rem;">🟡</div>
+        <h4>Medio</h4>
+        <p>La incógnita tiene coeficiente:</p>
+        <p><code>ax + b = c</code></p>
+        <p>Ejemplo: <code>3x + 5 = 20</code> → <b>x = 5</b></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+with c3:
+    st.markdown("""
+    <div class="nivel-card nivel-avanzado">
+        <div style="font-size:2rem;">🔴</div>
+        <h4>Avanzado</h4>
+        <p>La incógnita está en ambos lados:</p>
+        <p><code>ax + b = cx + d</code></p>
+        <p>Ejemplo: <code>3x + 5 = −2x − 10</code> → <b>x = −3</b></p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("""
+<div style="text-align:center; color:#4a148c; font-weight:600; margin: 0.5rem 0 1rem 0;">
+📌 Selecciona un <b>nivel</b> y un <b>modo</b> en el menú lateral, y pulsa
+<b>«Generar Ecuación»</b> para comenzar.
+</div>
+""", unsafe_allow_html=True)
+
+# ============================================================
+#  VARIABLES DE SESIÓN
+# ============================================================
+for clave, valor in [('puntos', 0), ('total_intentos', 0), ('problema_actual', None),
+                     ('mostrar_solucion', False), ('contador', 0)]:
+    if clave not in st.session_state:
+        st.session_state[clave] = valor
+
+# ============================================================
+#  BARRA LATERAL
+# ============================================================
 with st.sidebar:
     st.header("⚙️ Configuración")
 
-    nivel = st.radio(
-        "Nivel:",
-        ["Fácil", "Medio", "Avanzado"]
-    )
+    modo = st.radio("Modo de práctica:", ["🪜 Modo Guiado", "⚡ Modo Reto"], key="modo_sel")
+
+    # Si cambia el modo, limpiar el problema activo
+    if st.session_state.get("modo_prev") != modo:
+        st.session_state.modo_prev = modo
+        st.session_state.problema_actual = None
+
+    nivel = st.radio("Nivel:", ["Fácil", "Medio", "Avanzado"], key="nivel_sel")
+
+    # Si cambia el nivel, limpiar el problema activo
+    if st.session_state.get("nivel_prev") != nivel:
+        st.session_state.nivel_prev = nivel
+        st.session_state.problema_actual = None
 
     rango = st.slider(
         "Rango de números:",
@@ -228,21 +272,34 @@ with st.sidebar:
         st.session_state.mostrar_solucion = False
         st.rerun()
 
+# ============================================================
+#  FUNCIONES AUXILIARES DE FORMATEO
+# ============================================================
+
+def fmt_num(n):
+    """Número con paréntesis si es negativo: 5 → '5', -3 → '(-3)'"""
+    return f"({n})" if n < 0 else f"{n}"
+
+
+def ax_str(c):
+    """Término con x para mostrar: 3 → '3x', -2 → '(-2)x', 1 → 'x', -1 → '-x'"""
+    if c == 1:
+        return "x"
+    if c == -1:
+        return "-x"
+    return f"({c})x" if c < 0 else f"{c}x"
+
 
 # ============================================================
-# GENERADOR DE ECUACIONES (X primero, solución siempre entera)
+#  GENERADOR DE ECUACIONES (solución entera garantizada)
 # ============================================================
 
 def generar_ecuacion(rango, nivel):
-    """
-    Genera una ecuación con solución entera garantizada.
-    Se genera X primero y se construye la ecuación a partir de X.
-    """
+    """Genera la ecuación construyendo X primero."""
 
-    # ========== NIVEL FÁCIL ==========
     if nivel == "Fácil":
         x = random.randint(-rango, rango)
-        a = random.randint(-rango, rango)
+        a = random.choice([i for i in range(-rango, rango + 1) if i != 0])
         tipo = random.choice(['x+a=b', 'x-a=b', 'a+x=b', 'a-x=b'])
 
         if tipo == 'x+a=b':
@@ -251,17 +308,17 @@ def generar_ecuacion(rango, nivel):
             b = x - a
         elif tipo == 'a+x=b':
             b = a + x
-        else:  # a-x=b
+        else:  # a-x=b  (evitamos b = 0 para que las opciones tengan sentido)
+            if a - x == 0:
+                x += 1
             b = a - x
 
         return {'x': x, 'a': a, 'b': b, 'tipo': tipo, 'nivel': nivel}
 
-    # ========== NIVEL MEDIO ==========
     elif nivel == "Medio":
         x = random.randint(-rango, rango)
-        # Coeficiente a ≠ 0, con signo libre
         a = random.choice([i for i in range(-rango, rango + 1) if i != 0])
-        b = random.randint(-rango, rango)
+        b = random.choice([i for i in range(-rango, rango + 1) if i != 0])
         tipo = random.choice(['aX+b=c', 'aX-b=c', 'b+aX=c', 'b-aX=c'])
 
         if tipo == 'aX+b=c':
@@ -275,36 +332,32 @@ def generar_ecuacion(rango, nivel):
 
         return {'x': x, 'a': a, 'b': b, 'c': c, 'tipo': tipo, 'nivel': nivel}
 
-    # ========== NIVEL AVANZADO ==========
-    else:
+    else:  # Avanzado
         x = random.randint(-rango, rango)
         a = random.choice([i for i in range(-rango, rango + 1) if i != 0])
-        # c ≠ 0 y c ≠ a (evita degeneración: ax + b = ax + d)
         c = random.choice([i for i in range(-rango, rango + 1) if i != 0 and i != a])
-        b = random.randint(-rango, rango)
-        # d se calcula para que la ecuación cierre con el X elegido
-        d = (a - c) * x + b
+        b = random.choice([i for i in range(-rango, rango + 1) if i != 0])
 
         tipo = random.choice(['aX+b=cX+d', 'aX-b=cX+d', 'aX+b=cX-d', 'aX-b=cX-d'])
+
+        # CORRECCIÓN: d depende del tipo para que la ecuación sea verdadera
+        if tipo == 'aX+b=cX+d':
+            d = (a - c) * x + b      # ax + b = cx + d
+        elif tipo == 'aX-b=cX+d':
+            d = (a - c) * x - b      # ax − b = cx + d
+        elif tipo == 'aX+b=cX-d':
+            d = -(a - c) * x - b     # ax + b = cx − d
+        else:  # aX-b=cX-d
+            d = -(a - c) * x + b     # ax − b = cx − d
 
         return {'x': x, 'a': a, 'b': b, 'c': c, 'd': d, 'tipo': tipo, 'nivel': nivel}
 
 
 # ============================================================
-# FORMATEO DEL TEXTO DE LA ECUACIÓN (Opción C de paréntesis)
+#  FORMATEO DEL TEXTO DE LA ECUACIÓN
 # ============================================================
 
 def fmt_var(coef, primero=True):
-    """Formatea un término con x.
-    3, True   → '3x'
-    3, False  → ' + 3x'
-    -2, True  → '-2x'
-    -2, False → ' - 2x'
-    1, True   → 'x'
-    1, False  → ' + x'
-    -1, True  → '-x'
-    -1, False → ' - x'
-    """
     if coef == 0:
         return ""
     signo = ""
@@ -315,30 +368,14 @@ def fmt_var(coef, primero=True):
         if coef < 0:
             signo = "-"
             coef = abs(coef)
-
     cuerpo = "x" if coef == 1 else f"{coef}x"
     return f"{signo}{cuerpo}"
 
 
-def fmt_const(n, primero=True):
-    """Formatea un término constante.
-    primero=True:  5 → '5';  -3 → '-3'
-    primero=False: 5 → ' + 5';  -3 → ' + (-3)'
-    """
-    if primero:
-        return f"{n}"
-    if n >= 0:
-        return f" + {n}"
-    else:
-        return f" + ({n})"
-
-
 def formatear_ecuacion(p):
-    """Construye el texto de la ecuación según el nivel y tipo."""
     nivel = p['nivel']
     tipo = p['tipo']
 
-    # ========== FÁCIL ==========
     if nivel == "Fácil":
         a = p['a']
         b = p['b']
@@ -348,45 +385,34 @@ def formatear_ecuacion(p):
             return f"x - {a} = {b}" if a >= 0 else f"x - ({a}) = {b}"
         elif tipo == 'a+x=b':
             return f"{a} + x = {b}"
-        else:  # a-x=b
+        else:
             return f"{a} - x = {b}"
 
-    # ========== MEDIO ==========
     elif nivel == "Medio":
-        a = p['a']       # coeficiente de x
-        b = p['b']       # término constante
-        c = p['c']       # resultado
+        a, b, c = p['a'], p['b'], p['c']
 
         if tipo == 'aX+b=c':
-            # ax + b = c
             izq = fmt_var(a, primero=True)
             izq += f" + {b}" if b >= 0 else f" + ({b})"
             return f"{izq} = {c}"
         elif tipo == 'aX-b=c':
-            # ax - b = c
             izq = fmt_var(a, primero=True)
             izq += f" - {b}" if b >= 0 else f" - ({b})"
             return f"{izq} = {c}"
         elif tipo == 'b+aX=c':
-            # b + ax = c
-            der = fmt_var(a, primero=False)   # " + 3x" o " - 3x"
+            der = fmt_var(a, primero=False)
             if b >= 0:
                 return f"{b}{der} = {c}"
             else:
                 return f"({b}){der} = {c}"
         else:  # b-aX=c
-            # b - ax = c
             if a >= 0:
                 return f"{b} - {a}x = {c}"
             else:
                 return f"{b} - ({a})x = {c}"
 
-    # ========== AVANZADO ==========
-    else:
-        a = p['a']
-        b = p['b']
-        c = p['c']
-        d = p['d']
+    else:  # Avanzado
+        a, b, c, d = p['a'], p['b'], p['c'], p['d']
 
         if tipo == 'aX+b=cX+d':
             izq = fmt_var(a, primero=True)
@@ -394,21 +420,18 @@ def formatear_ecuacion(p):
             der = fmt_var(c, primero=True)
             der += f" + {d}" if d >= 0 else f" + ({d})"
             return f"{izq} = {der}"
-
         elif tipo == 'aX-b=cX+d':
             izq = fmt_var(a, primero=True)
             izq += f" - {b}" if b >= 0 else f" - ({b})"
             der = fmt_var(c, primero=True)
             der += f" + {d}" if d >= 0 else f" + ({d})"
             return f"{izq} = {der}"
-
         elif tipo == 'aX+b=cX-d':
             izq = fmt_var(a, primero=True)
             izq += f" + {b}" if b >= 0 else f" + ({b})"
             der = fmt_var(c, primero=True)
             der += f" - {d}" if d >= 0 else f" - ({d})"
             return f"{izq} = {der}"
-
         else:  # aX-b=cX-d
             izq = fmt_var(a, primero=True)
             izq += f" - {b}" if b >= 0 else f" - ({b})"
@@ -418,121 +441,316 @@ def formatear_ecuacion(p):
 
 
 # ============================================================
-# EXPLICACIÓN PASO A PASO
+#  CONSTRUCTOR DE PASOS GUIADOS
 # ============================================================
 
-def fmt_num(n):
-    """Devuelve el número con paréntesis si es negativo: 5 → '5', -3 → '(-3)'"""
-    return f"({n})" if n < 0 else f"{n}"
+def paso_opcion(pregunta, correcta, distractores, pista, resuelto_texto):
+    """Crea un paso de opción múltiple con 3 opciones mezcladas."""
+    opciones = [correcta] + distractores
+    random.shuffle(opciones)
+    return {
+        'tipo': 'opcion',
+        'pregunta': pregunta,
+        'opciones': opciones,
+        'respuesta': correcta,
+        'pista': pista,
+        'resuelto_texto': resuelto_texto,
+    }
 
 
-def generar_explicacion(p):
-    """Devuelve una lista de pasos (strings markdown) según el tipo."""
+def paso_numero(pregunta, respuesta, pista, resuelto_texto):
+    """Crea un paso de respuesta numérica."""
+    return {
+        'tipo': 'numero',
+        'pregunta': pregunta,
+        'respuesta': respuesta,
+        'pista': pista,
+        'resuelto_texto': resuelto_texto,
+    }
+
+
+def construir_pasos(p):
+    """Construye la lista de pasos guiados según nivel y tipo."""
+    pasos = []
     nivel = p['nivel']
     tipo = p['tipo']
     x = p['x']
-    pasos = []
 
-    # ========== FÁCIL ==========
+    # ==================== NIVEL FÁCIL ====================
     if nivel == "Fácil":
         a = p['a']
         b = p['b']
 
         if tipo == 'x+a=b':
-            pasos.append(f"**Ecuación:** x + {fmt_num(a)} = {b}" if a < 0 else f"**Ecuación:** x + {a} = {b}")
-            pasos.append(f"**Paso 1:** Restamos **{fmt_num(a)}** en ambos lados.")
-            pasos.append(f"x = {b} - {fmt_num(a)}")
+            pasos.append(paso_opcion(
+                "¿Qué operación debes hacer en **ambos lados** para dejar la x sola?",
+                f"Restar {fmt_num(a)}",
+                [f"Sumar {fmt_num(a)}", f"Dividir entre {fmt_num(a)}"],
+                "Lo que está SUMANDO pasa al otro lado RESTANDO.",
+                f"x + {fmt_num(a)} = {b}  →  x = {b} − {fmt_num(a)}"))
+            pasos.append(paso_numero(
+                "Aplica la operación. ¿Cuánto vale **x**?",
+                x,
+                f"{b} − {fmt_num(a)} = ?  ¡Cuidado con los signos!",
+                f"**x = {x}**"))
+
+        elif tipo == 'x-a=b':
+            pasos.append(paso_opcion(
+                "¿Qué operación debes hacer en **ambos lados** para dejar la x sola?",
+                f"Sumar {fmt_num(a)}",
+                [f"Restar {fmt_num(a)}", f"Dividir entre {fmt_num(a)}"],
+                "Lo que está RESTANDO pasa al otro lado SUMANDO.",
+                f"x − {fmt_num(a)} = {b}  →  x = {b} + {fmt_num(a)}"))
+            pasos.append(paso_numero(
+                "Aplica la operación. ¿Cuánto vale **x**?",
+                x,
+                f"{b} + {fmt_num(a)} = ?  ¡Cuidado con los signos!",
+                f"**x = {x}**"))
+
+        elif tipo == 'a+x=b':
+            pasos.append(paso_opcion(
+                "¿Qué operación debes hacer en **ambos lados** para dejar la x sola?",
+                f"Restar {fmt_num(a)}",
+                [f"Sumar {fmt_num(a)}", f"Dividir entre {fmt_num(a)}"],
+                "El número que acompaña a la x (aunque esté antes) pasa RESTANDO.",
+                f"{a} + x = {b}  →  x = {b} − {fmt_num(a)}"))
+            pasos.append(paso_numero(
+                "Aplica la operación. ¿Cuánto vale **x**?",
+                x,
+                f"{b} − {fmt_num(a)} = ?  ¡Cuidado con los signos!",
+                f"**x = {x}**"))
+
+        else:  # a-x=b  (caso especial: 3 pasos)
+            pasos.append(paso_opcion(
+                "La x está **restando**. ¿Qué hacemos primero?",
+                "Sumar x en ambos lados",
+                [f"Restar {fmt_num(a)} en ambos lados", f"Dividir entre {fmt_num(a)}"],
+                "Cuando la x está restando, pásala al otro lado SUMANDO.",
+                f"{a} − x = {b}  →  {fmt_num(a)} = {b} + x"))
+            pasos.append(paso_opcion(
+                f"Ahora tenemos {fmt_num(a)} = {b} + x. ¿Qué operación despeja la x?",
+                f"Restar {fmt_num(b)}",
+                [f"Sumar {fmt_num(b)}", f"Dividir entre {fmt_num(b)}"],
+                "El número que acompaña a la x pasa RESTANDO.",
+                f"x = {fmt_num(a)} − {fmt_num(b)}"))
+            pasos.append(paso_numero(
+                "¿Cuánto vale **x**?",
+                x,
+                f"x = {a} − {fmt_num(b)} = ?  ¡Cuidado con los signos!",
+                f"**x = {x}**"))
+
+    # ==================== NIVEL MEDIO ====================
+    elif nivel == "Medio":
+        a, b, c = p['a'], p['b'], p['c']
+        ax = ax_str(a)
+
+        if tipo in ('aX+b=c', 'aX-b=c', 'b+aX=c'):
+            if tipo == 'aX-b=c':
+                oper1 = f"Sumar {fmt_num(b)}"
+                distr1 = [f"Restar {fmt_num(b)}", f"Dividir entre {fmt_num(a)}"]
+                pista1 = "Primero aisla el término con x: lo que está RESTANDO pasa SUMANDO."
+                val_ax = c + b
+                signo = "+"
+                exp2 = f"{fmt_num(c)} + {fmt_num(b)} = ?"
+            else:
+                oper1 = f"Restar {fmt_num(b)}"
+                distr1 = [f"Sumar {fmt_num(b)}", f"Dividir entre {fmt_num(a)}"]
+                pista1 = "Primero aisla el término con x: lo que está SUMANDO pasa RESTANDO."
+                val_ax = c - b
+                signo = "−"
+                exp2 = f"{fmt_num(c)} − {fmt_num(b)} = ?"
+
+            pasos.append(paso_opcion(
+                "¿Qué operación haces **primero** para aislar el término con x?",
+                oper1, distr1, pista1,
+                f"{formatear_ecuacion(p)}  →  {ax} = {fmt_num(c)} {signo} {fmt_num(b)}"))
+            pasos.append(paso_numero(
+                f"Aplica la operación. Completa: **{ax} = ___**",
+                val_ax, exp2,
+                f"**{ax} = {val_ax}**"))
+            pasos.append(paso_opcion(
+                "El término con x está aislado. ¿Qué operación sigue?",
+                f"Dividir entre {fmt_num(a)}",
+                [f"Multiplicar por {fmt_num(a)}", f"Restar {fmt_num(a)}"],
+                "Lo que MULTIPLICA a la x pasa DIVIDIENDO a todo el miembro.",
+                f"{ax} = {val_ax}  →  x = {val_ax} ÷ {fmt_num(a)}"))
+            pasos.append(paso_numero(
+                "¿Cuál es el valor de **x**?",
+                x,
+                f"x = {val_ax} ÷ {fmt_num(a)} = ?  Recuerda la regla de signos.",
+                f"**x = {x}**"))
+
+        else:  # b-aX=c  (caso especial)
+            pasos.append(paso_opcion(
+                "La x está **restando** y tiene coeficiente. ¿Qué hacemos primero?",
+                f"Sumar {ax_str(a)} en ambos lados",
+                [f"Restar {fmt_num(b)} en ambos lados", f"Dividir entre {fmt_num(a)}"],
+                "Cuando la x está restando, pásala al otro lado SUMANDO.",
+                f"{fmt_num(b)} = {fmt_num(c)} + {ax_str(a)}"))
+            pasos.append(paso_opcion(
+                f"Ahora: {fmt_num(b)} = {fmt_num(c)} + {ax_str(a)}. ¿Qué operación sigue?",
+                f"Restar {fmt_num(c)}",
+                [f"Sumar {fmt_num(c)}", f"Dividir entre {fmt_num(a)}"],
+                "El número solo pasa al otro lado RESTANDO.",
+                f"{ax_str(a)} = {b - c}"))
+            pasos.append(paso_opcion(
+                "¿Cómo despejas la **x**?",
+                f"Dividir entre {fmt_num(a)}",
+                [f"Multiplicar por {fmt_num(a)}", f"Restar {fmt_num(a)}"],
+                "Lo que multiplica a la x pasa DIVIDIENDO.",
+                f"x = {b - c} ÷ {fmt_num(a)}"))
+            pasos.append(paso_numero(
+                "¿Cuánto vale **x**?",
+                x,
+                f"x = {b - c} ÷ {fmt_num(a)} = ?  Recuerda la regla de signos.",
+                f"**x = {x}**"))
+
+    # ==================== NIVEL AVANZADO ====================
+    else:
+        a, b, c, d = p['a'], p['b'], p['c'], p['d']
+        coef = a - c
+
+        # Según la variante, la constante izquierda se mueve restando o sumando,
+        # y el valor base derecho es d o -d
+        if tipo in ('aX+b=cX+d', 'aX+b=cX-d'):
+            oper3 = f"Restar {fmt_num(b)}"
+            opp3 = f"Sumar {fmt_num(b)}"
+            signo_exp = "−"
+        else:
+            oper3 = f"Sumar {fmt_num(b)}"
+            opp3 = f"Restar {fmt_num(b)}"
+            signo_exp = "+"
+
+        right_base = d if tipo in ('aX+b=cX+d', 'aX-b=cX+d') else -d
+        right_final = right_base - b if signo_exp == "−" else right_base + b
+
+        pasos.append(paso_opcion(
+            "¿Qué haces para **agrupar las x** en el lado izquierdo?",
+            f"Restar {ax_str(c)} en ambos lados",
+            [f"Sumar {ax_str(c)} en ambos lados", f"Restar {fmt_num(b)} en ambos lados"],
+            "Junta las x de un lado: lo que suma pasa RESTANDO.",
+            f"{ax_str(a)} − {ax_str(c)} = ..."))
+        pasos.append(paso_numero(
+            "Simplifica el lado izquierdo. ¿De cuánto queda el coeficiente de x? "
+            "(escribe solo el número)",
+            coef,
+            f"{a} − {fmt_num(c)} = ?",
+            f"**{ax_str(coef)}** = ... (falta mover el número)"))
+        pasos.append(paso_opcion(
+            f"¿Qué haces con el **{fmt_num(b)}** para dejar solo las x a la izquierda?",
+            oper3,
+            [opp3, f"Dividir entre {fmt_num(coef)}"],
+            "El número pasa al otro lado con la operación contraria.",
+            f"{ax_str(coef)} = {fmt_num(right_base)} {signo_exp} {fmt_num(b)}"))
+        pasos.append(paso_numero(
+            f"Aplica la operación. Completa: **{ax_str(coef)} = ___**",
+            right_final,
+            f"{fmt_num(right_base)} {signo_exp} {fmt_num(b)} = ?",
+            f"**{coef}x = {right_final}**"))
+        pasos.append(paso_opcion(
+            "¿Cómo despejas la **x**?",
+            f"Dividir entre {fmt_num(coef)}",
+            [f"Multiplicar por {fmt_num(coef)}", f"Restar {fmt_num(coef)}"],
+            "Lo que multiplica a la x pasa DIVIDIENDO.",
+            f"x = {right_final} ÷ {fmt_num(coef)}"))
+        pasos.append(paso_numero(
+            "¿Cuál es el valor de **x**?",
+            x,
+            f"x = {right_final} ÷ {fmt_num(coef)} = ?  Recuerda la regla de signos.",
+            f"**x = {x}**"))
+
+    return pasos
+
+
+# ============================================================
+#  EXPLICACIÓN COMPLETA (resumen final)
+# ============================================================
+
+def generar_explicacion(p):
+    nivel = p['nivel']
+    tipo = p['tipo']
+    x = p['x']
+    pasos = []
+
+    if nivel == "Fácil":
+        a = p['a']
+        b = p['b']
+        if tipo == 'x+a=b':
+            pasos.append(f"**Ecuación:** x + {fmt_num(a)} = {b}")
+            pasos.append(f"**Paso 1:** Restamos **{fmt_num(a)}** en ambos lados → x = {b} − {fmt_num(a)}")
             pasos.append(f"**Paso 2:** Resolvemos → **x = {x}**")
         elif tipo == 'x-a=b':
-            pasos.append(f"**Ecuación:** x - {fmt_num(a)} = {b}" if a < 0 else f"**Ecuación:** x - {a} = {b}")
-            pasos.append(f"**Paso 1:** Sumamos **{fmt_num(a)}** en ambos lados.")
-            pasos.append(f"x = {b} + {fmt_num(a)}")
+            pasos.append(f"**Ecuación:** x − {fmt_num(a)} = {b}")
+            pasos.append(f"**Paso 1:** Sumamos **{fmt_num(a)}** en ambos lados → x = {b} + {fmt_num(a)}")
             pasos.append(f"**Paso 2:** Resolvemos → **x = {x}**")
         elif tipo == 'a+x=b':
             pasos.append(f"**Ecuación:** {a} + x = {b}")
-            pasos.append(f"**Paso 1:** Restamos **{a}** en ambos lados.")
-            pasos.append(f"x = {b} - {a}")
+            pasos.append(f"**Paso 1:** Restamos **{a}** en ambos lados → x = {b} − {fmt_num(a)}")
             pasos.append(f"**Paso 2:** Resolvemos → **x = {x}**")
-        else:  # a-x=b
-            pasos.append(f"**Ecuación:** {a} - x = {b}")
-            pasos.append(f"**Paso 1:** Pasamos x al otro lado: **{a} = {b} + x**")
-            pasos.append(f"**Paso 2:** Restamos **{b}** en ambos lados: x = {a} - {b}")
+        else:
+            pasos.append(f"**Ecuación:** {a} − x = {b}")
+            pasos.append(f"**Paso 1:** Sumamos **x** en ambos lados → {fmt_num(a)} = {b} + x")
+            pasos.append(f"**Paso 2:** Restamos **{b}** en ambos lados → x = {fmt_num(a)} − {fmt_num(b)}")
             pasos.append(f"**Paso 3:** Resolvemos → **x = {x}**")
 
-    # ========== MEDIO ==========
     elif nivel == "Medio":
-        a = p['a']
-        b = p['b']
-        c = p['c']
-
+        a, b, c = p['a'], p['b'], p['c']
         pasos.append(f"**Ecuación:** {formatear_ecuacion(p)}")
 
-        if tipo in ('aX+b=c', 'aX-b=c'):
-            # Aislamos el término con x
-            if tipo == 'aX+b=c':
-                pasos.append(f"**Paso 1:** Restamos {fmt_num(b)} en ambos lados.")
-                pasos.append(f"{a}x = {c} - {fmt_num(b)}")
-                pasos.append(f"{a}x = {c - b}")
-            else:  # aX-b=c
-                pasos.append(f"**Paso 1:** Sumamos {fmt_num(b)} en ambos lados.")
-                pasos.append(f"{a}x = {c} + {fmt_num(b)}")
-                pasos.append(f"{a}x = {c + b}")
-            pasos.append(f"**Paso 2:** Dividimos ambos lados entre {fmt_num(a)}.")
-            pasos.append(f"x = {c - b} ÷ {fmt_num(a)}")
+        if tipo in ('aX+b=c', 'aX-b=c', 'b+aX=c'):
+            if tipo == 'aX-b=c':
+                pasos.append(f"**Paso 1:** Sumamos {fmt_num(b)} en ambos lados → {ax_str(a)} = {c + b}")
+                val = c + b
+            else:
+                pasos.append(f"**Paso 1:** Restamos {fmt_num(b)} en ambos lados → {ax_str(a)} = {c - b}")
+                val = c - b
+            pasos.append(f"**Paso 2:** Dividimos entre {fmt_num(a)} → x = {val} ÷ {fmt_num(a)}")
             pasos.append(f"**x = {x}**")
-
-        elif tipo == 'b+aX=c':
-            pasos.append(f"**Paso 1:** Restamos {fmt_num(b)} en ambos lados.")
-            pasos.append(f"{a}x = {c} - {fmt_num(b)}")
-            pasos.append(f"{a}x = {c - b}")
-            pasos.append(f"**Paso 2:** Dividimos ambos lados entre {fmt_num(a)}.")
-            pasos.append(f"x = {c - b} ÷ {fmt_num(a)}")
-            pasos.append(f"**x = {x}**")
-
         else:  # b-aX=c
-            pasos.append(f"**Paso 1:** Pasamos el término con x al otro lado.")
-            pasos.append(f"{fmt_num(b)} = {c} + {a}x" if a >= 0 else f"{fmt_num(b)} = {c} + ({a})x")
-            pasos.append(f"**Paso 2:** Restamos {fmt_num(c)} en ambos lados.")
-            pasos.append(f"{fmt_num(b)} - {fmt_num(c)} = {a}x" if a >= 0 else f"{fmt_num(b)} - {fmt_num(c)} = ({a})x")
-            pasos.append(f"**Paso 3:** Dividimos ambos lados entre {fmt_num(a)}.")
-            pasos.append(f"x = {b - c} ÷ {fmt_num(a)}")
+            pasos.append(f"**Paso 1:** Sumamos {ax_str(a)} en ambos lados → {fmt_num(b)} = {fmt_num(c)} + {ax_str(a)}")
+            pasos.append(f"**Paso 2:** Restamos {fmt_num(c)} → {ax_str(a)} = {b - c}")
+            pasos.append(f"**Paso 3:** Dividimos entre {fmt_num(a)} → x = {b - c} ÷ {fmt_num(a)}")
             pasos.append(f"**x = {x}**")
 
-    # ========== AVANZADO ==========
-    else:
-        a = p['a']
-        b = p['b']
-        c = p['c']
-        d = p['d']
-
+    else:  # Avanzado
+        a, b, c, d = p['a'], p['b'], p['c'], p['d']
+        coef = a - c
         pasos.append(f"**Ecuación:** {formatear_ecuacion(p)}")
-        pasos.append(f"**Paso 1:** Agrupamos los términos con x en un lado y los números en el otro.")
-        pasos.append(f"{a}x - ({c})x = {d} - ({b})" if (c < 0 or b < 0) else f"{a}x - {c}x = {d} - {b}")
-        pasos.append(f"**Paso 2:** Simplificamos ambos lados.")
-        pasos.append(f"({a - c})x = {d - b}")
-        pasos.append(f"**Paso 3:** Dividimos ambos lados entre {fmt_num(a - c)}.")
-        pasos.append(f"x = {d - b} ÷ {fmt_num(a - c)}")
+        pasos.append(f"**Paso 1:** Restamos {ax_str(c)} en ambos lados → {ax_str(a)} − {ax_str(c)} = ...")
+        pasos.append(f"**Paso 2:** Simplificamos → {ax_str(coef)}")
+        pasos.append(f"**Paso 3:** Movemos el número al otro lado y simplificamos → "
+                     f"{ax_str(coef)} = {coef * x}")
+        pasos.append(f"**Paso 4:** Dividimos entre {fmt_num(coef)} → x = {coef * x} ÷ {fmt_num(coef)}")
         pasos.append(f"**x = {x}**")
 
     return pasos
 
 
 # ============================================================
-# LÓGICA DE LA APP
+#  LÓGICA DE LA APP
 # ============================================================
 
 def nueva_ecuacion():
-    """Genera una ecuación nueva y limpia el estado."""
-    problema = generar_ecuacion(rango, nivel)
-    problema['texto'] = formatear_ecuacion(problema)
-    st.session_state.problema_actual = problema
+    """Genera una ecuación nueva con sus pasos guiados."""
+    p = generar_ecuacion(rango, nivel)
+    p['texto'] = formatear_ecuacion(p)
+    p['pasos'] = construir_pasos(p)
+    p['paso_actual'] = 0
+    p['fallos_paso'] = 0
+    p['todo_primera'] = True
+    p['ver_pista'] = False
+    p['bonus_ganado'] = False
+    p['celebrar'] = False
+    st.session_state.contador += 1
+    p['key'] = st.session_state.contador
+    st.session_state.problema_actual = p
     st.session_state.mostrar_solucion = False
 
 
-# ---------- Botón nuevo problema ----------
-col_btn1, col_btn2, col_btn3 = st.columns([1, 2, 1])
-with col_btn2:
-    if st.button("🎲 Nueva ecuación", use_container_width=True):
+# ---------- Botón generar ----------
+col_b1, col_b2, col_b3 = st.columns([1, 2, 1])
+with col_b2:
+    if st.button("🎲 Generar Ecuación", use_container_width=True):
         nueva_ecuacion()
         st.rerun()
 
@@ -547,144 +765,204 @@ st.markdown("""
 ">
 """, unsafe_allow_html=True)
 
-# ---------- Mostrar problema activo ----------
-if st.session_state.problema_actual:
+# ============================================================
+#  ZONA DE EJERCICIO
+# ============================================================
+if st.session_state.problema_actual is not None:
     problema = st.session_state.problema_actual
-    mostrar = st.session_state.mostrar_solucion
 
-    col1, col2, col3 = st.columns([1, 3, 1])
-    with col2:
-        if mostrar:
-            st.markdown(f"## **{problema['texto']}**  ✅  →  **x = {problema['x']}**")
+    if modo == "🪜 Modo Guiado":
+        # ==================== MODO GUIADO ====================
+        if not st.session_state.mostrar_solucion:
+            n = len(problema['pasos'])
+            i = problema['paso_actual']
+
+            # Ecuación grande
+            col1, col2, col3 = st.columns([1, 3, 1])
+            with col2:
+                st.markdown(f"## **{problema['texto']}**  →  **x = ?**")
+
+            # Progreso
+            st.progress(i / n)
+            st.markdown(f"🪜 **Paso {i + 1} de {n}**")
+
+            # Pasos ya resueltos
+            for j in range(i):
+                st.markdown(f"✅ {problema['pasos'][j]['resuelto_texto']}")
+
+            paso = problema['pasos'][i]
+            st.markdown(f"**{paso['pregunta']}**")
+
+            if paso['tipo'] == 'opcion':
+                entrada = st.radio(
+                    "Elige una opción:",
+                    paso['opciones'],
+                    key=f"op_{problema['key']}_{i}",
+                    index=None
+                )
+            else:
+                entrada = st.number_input(
+                    "Tu respuesta:",
+                    value=None,
+                    step=1,
+                    key=f"num_{problema['key']}_{i}"
+                )
+
+            c1, c2 = st.columns(2)
+            with c1:
+                boton_check = st.button("✅ Comprobar", use_container_width=True)
+            with c2:
+                boton_pista = st.button("💡 Pista", use_container_width=True)
+
+            if boton_pista:
+                problema['ver_pista'] = True
+            if problema['ver_pista']:
+                st.info("💡 " + paso['pista'])
+
+            if boton_check:
+                if entrada is None:
+                    st.warning("⚠️ Selecciona o escribe tu respuesta.")
+                else:
+                    st.session_state.total_intentos += 1
+                    if entrada == paso['respuesta']:
+                        if problema['fallos_paso'] > 0:
+                            problema['todo_primera'] = False
+                        problema['paso_actual'] += 1
+                        problema['fallos_paso'] = 0
+                        problema['ver_pista'] = False
+                        if problema['paso_actual'] == n:
+                            # ¡Ecuación completada!
+                            st.session_state.puntos += 1
+                            if problema['todo_primera']:
+                                st.session_state.puntos += 1
+                                problema['bonus_ganado'] = True
+                            st.session_state.mostrar_solucion = True
+                            problema['celebrar'] = True
+                        st.rerun()
+                    else:
+                        problema['fallos_paso'] += 1
+                        st.error("❌ ¡Casi! Revisa la operación e inténtalo de nuevo.")
+                        if problema['fallos_paso'] >= 2:
+                            problema['ver_pista'] = True
+                        st.rerun()
+
         else:
+            # ==================== COMPLETADA ====================
+            if problema.get('celebrar'):
+                st.balloons()
+                problema['celebrar'] = False
+
+            if problema['bonus_ganado']:
+                st.success(f"🎉 ¡Ecuación resuelta! **x = {problema['x']}** "
+                           f"· ⭐ ¡Todo a la primera! **+2 puntos**")
+            else:
+                st.success(f"🎉 ¡Ecuación resuelta! **x = {problema['x']}** · +1 punto")
+
+            with st.expander("📖 Ver resumen de la solución", expanded=True):
+                for linea in generar_explicacion(problema):
+                    st.markdown(linea)
+                st.info("💡 **Recuerda:** lo que haces de un lado de la ecuación, "
+                        "debes hacerlo del otro (propiedad de la igualdad).")
+
+            if st.button("🎲 Otra ecuación", use_container_width=True):
+                nueva_ecuacion()
+                st.rerun()
+
+    else:
+        # ==================== MODO RETO ====================
+        col1, col2, col3 = st.columns([1, 3, 1])
+        with col2:
             st.markdown(f"## **{problema['texto']}**  →  **x = ?**")
 
-    respuesta = st.number_input(
-        "Tu respuesta (valor de x):",
-        value=None,
-        placeholder="Escribe el valor de x...",
-        step=1,
-        key=f"resp_{problema['texto']}_{st.session_state.total_intentos}"
-    )
+        respuesta = st.number_input(
+            "Tu respuesta (valor de x):",
+            value=None,
+            placeholder="Escribe el valor de x...",
+            step=1,
+            key=f"resp_{problema['key']}"
+        )
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-        if st.button("✅ Comprobar", use_container_width=True):
-            if respuesta is None:
-                st.warning("⚠️ Escribe un valor para x antes de comprobar.")
-            else:
-                st.session_state.total_intentos += 1
-                if respuesta == problema['x']:
-                    st.success(f"¡Correcto! 🎉 x = {problema['x']} hace verdadera la ecuación.")
-                    st.session_state.puntos += 1
-                    st.session_state.mostrar_solucion = True
-                    st.balloons()
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("✅ Comprobar", use_container_width=True):
+                if respuesta is None:
+                    st.warning("⚠️ Escribe un valor para x antes de comprobar.")
                 else:
-                    st.error(f"¡Ups! Intenta de nuevo. La respuesta correcta es x = {problema['x']}")
-                    st.session_state.mostrar_solucion = True
-
-    with col2:
-        if st.button("🔄 Otra ecuación", use_container_width=True):
-            nueva_ecuacion()
-            st.rerun()
-
-    # ---------- Explicación paso a paso ----------
-    if mostrar:
-        with st.expander("🔍 Ver explicación paso a paso", expanded=True):
-            st.markdown(f"### ✏️ Despeje de la incógnita — Nivel {problema['nivel']}")
-            for paso in generar_explicacion(problema):
-                st.markdown(paso)
-
-            st.info("💡 **Recuerda:** resolver una ecuación es encontrar el valor de **x** que hace verdadera la igualdad. Lo que haces de un lado, lo haces del otro (propiedad de la igualdad).")
-
+                    st.session_state.total_intentos += 1
+                    if respuesta == problema['x']:
+                        st.success(f"¡Correcto! 🎉 x = {problema['x']}")
+                        st.session_state.puntos += 1
+                        st.balloons()
+                    else:
+                        st.error(f"La respuesta correcta es x = {problema['x']}.")
+                        st.info("💡 ¿Quieres repasar el procedimiento? Cambia al "
+                                "**🪜 Modo Guiado** en el menú lateral.")
+        with col2:
+            if st.button("🔄 Otra ecuación", use_container_width=True):
+                nueva_ecuacion()
+                st.rerun()
 
 # ============================================================
-# AYUDA
+#  AYUDA: REGLAS DE TRANSPOSICIÓN
 # ============================================================
-
-with st.expander("📚 ¿Cómo resolver ecuaciones con enteros? (Haz clic para aprender)"):
+with st.expander("📚 Reglas de transposición (Haz clic para aprender)"):
     st.markdown("""
     <div style="color: #4a148c; line-height: 1.7;">
 
-    <h3 style="color: #4a148c !important;">Reglas básicas para resolver ecuaciones en ℤ</h3>
-
-    Una <b>ecuación</b> es una igualdad donde hay un valor desconocido llamado <b>incógnita</b> (generalmente <b>x</b>).
-    Resolverla significa encontrar el valor de <b>x</b> que hace verdadera la igualdad.
-    En ℤ, <b>todas las soluciones son enteras</b>.
-
-    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
-
-    <h4 style="color: #4a148c !important;">🔹 Nivel Fácil — la incógnita aparece sola</h4>
+    <h3 style="color: #4a148c !important;">🔀 Cómo pasar un término al otro lado</h3>
 
     <table style="width: 100%; border-collapse: collapse; color: #4a148c;">
       <tr style="background-color: #e1bee7;">
-        <th style="padding: 8px; border: 1px solid #8e24aa; text-align: left;">Ecuación</th>
-        <th style="padding: 8px; border: 1px solid #8e24aa; text-align: left;">¿Cómo despejar?</th>
+        <th style="padding: 8px; border: 1px solid #8e24aa; text-align: left;">Regla</th>
         <th style="padding: 8px; border: 1px solid #8e24aa; text-align: left;">Ejemplo</th>
       </tr>
       <tr>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">x + a = b</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">Restar <b>a</b> en ambos lados</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">x + 3 = 8 → x = 8 − 3 = <b>5</b></td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          a) Cuando un término está <b>SUMANDO</b> en un miembro, pasa al otro miembro <b>RESTANDO</b>.
+        </td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          <code>5x + 3 = 2x</code> → <code>5x = 2x − 3</code>
+        </td>
       </tr>
       <tr>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">x − a = b</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">Sumar <b>a</b> en ambos lados</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">x − 4 = 2 → x = 2 + 4 = <b>6</b></td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          b) Cuando un término está <b>RESTANDO</b> en un miembro, pasa al otro miembro <b>SUMANDO</b>.
+        </td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          <code>5x = 2x − 3</code> → <code>5x − 2x = −3</code>
+        </td>
       </tr>
       <tr>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">a + x = b</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">Restar <b>a</b> en ambos lados</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">7 + x = 10 → x = 10 − 7 = <b>3</b></td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          c) Cuando un término está <b>MULTIPLICANDO</b> en un miembro, pasa al otro miembro
+          <b>DIVIDIENDO</b> a todo el miembro.
+        </td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          <code>5x = 10</code> → <code>x = 10 / 5</code>
+        </td>
       </tr>
       <tr>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">a − x = b</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">x = a − b</td>
-        <td style="padding: 8px; border: 1px solid #ce93d8;">9 − x = 4 → x = 9 − 4 = <b>5</b></td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          d) Cuando un término está <b>DIVIDIENDO</b> en un miembro, pasa al otro miembro
+          <b>MULTIPLICANDO</b> a todo el miembro.
+        </td>
+        <td style="padding: 8px; border: 1px solid #ce93d8;">
+          <code>x / 4 = 3</code> → <code>x = 4 · 3 = 12</code>
+        </td>
       </tr>
     </table>
 
     <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
 
-    <h4 style="color: #4a148c !important;">🔹 Nivel Medio — la incógnita tiene coeficiente</h4>
-
-    Primero <b>aísla</b> el término con x y luego <b>divide</b> entre el coeficiente:
-
-    <ul>
-      <li><code>3x + 5 = 20</code> → <code>3x = 20 − 5 = 15</code> → <code>x = 15 ÷ 3 = 5</code></li>
-      <li><code>−2x − 3 = 9</code> → <code>−2x = 9 + 3 = 12</code> → <code>x = 12 ÷ (−2) = −6</code></li>
-      <li><code>7 + 4x = −1</code> → <code>4x = −1 − 7 = −8</code> → <code>x = −8 ÷ 4 = −2</code></li>
-      <li><code>5 − 3x = −4</code> → <code>5 = −4 + 3x</code> → <code>9 = 3x</code> → <code>x = 3</code></li>
-    </ul>
-
-    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
-
-    <h4 style="color: #4a148c !important;">🔹 Nivel Avanzado — la incógnita en ambos lados</h4>
-
-    <b>Paso 1:</b> agrupa las x en un lado y los números en el otro.<br>
-    <b>Paso 2:</b> simplifica ambos lados.<br>
-    <b>Paso 3:</b> divide entre el coeficiente de x.<br><br>
-
-    Ejemplo: 
-    → <code>3x + 5 = −2x − 10</code><br>
-    → <code>3x + 2x = −10 − 5</code><br>
-    → <code>5x = −15</code><br>
-    → <code>x = −15 ÷ 5 = −3</code>
-
-    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
-
-    <h4 style="color: #4a148c !important;">🔹 La regla de oro</h4>
+    <h4 style="color: #4a148c !important;">⚖️ La regla de oro</h4>
     <blockquote style="border-left: 4px solid #8e24aa; padding-left: 12px; color: #4a148c;">
-      <b>Lo que sumas o restas de un lado de la ecuación, debes hacerlo también del otro lado.</b><br>
-      Así se mantiene el equilibrio de la balanza. ⚖️
+      <b>Lo que sumas, restas, multiplicas o divides de un lado de la ecuación,
+      debes hacerlo también del otro lado.</b> Así se mantiene el equilibrio. ⚖️
     </blockquote>
 
-    <hr style="border: none; height: 1px; background: #ce93d8; margin: 1rem 0;">
-
-    <h4 style="color: #4a148c !important;">🔹 Verificación</h4>
-    Reemplaza <b>x</b> en la ecuación original y comprueba que ambos lados sean iguales.<br><br>
-    Ejemplo: si resolviste <code>x + 3 = 8</code> y obtuviste <code>x = 5</code>:<br>
+    <h4 style="color: #4a148c !important;">✔️ Verifica tu respuesta</h4>
+    Reemplaza <b>x</b> en la ecuación original y comprueba que ambos lados sean iguales.<br>
+    Ejemplo: si resolviste <code>x + 3 = 8</code> y obtuviste <code>x = 5</code>:
     <code>5 + 3 = 8</code> ✅ ¡Correcto!
 
     </div>
