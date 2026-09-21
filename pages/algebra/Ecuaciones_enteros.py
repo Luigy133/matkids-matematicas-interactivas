@@ -152,7 +152,7 @@ st.markdown("""
 st.markdown(
     "<h1 style='text-align: center; font-size: 2rem; color: #4a148c; margin-bottom: 0.5rem;'>"
     "🧮 Ecuaciones de 1er Grado con Números Enteros"
-    "</h2>",
+    "</h1>",
     unsafe_allow_html=True
 )
 
