@@ -151,7 +151,7 @@ st.markdown("""
 # ---------- Título centrado en una línea ----------
 st.markdown(
     "<h1 style='text-align: center; font-size: 2rem; color: #4a148c; margin-bottom: 0.5rem;'>"
-    "🧮 Ecuaciones con Números Enteros"
+    "🧮 Ecuaciones de 1er Grado con Números Enteros"
     "</h1>",
     unsafe_allow_html=True
 )
@@ -169,8 +169,13 @@ st.markdown("""
     margin: 1rem 0 1.5rem 0;
     box-shadow: 0 2px 6px rgba(142, 36, 170, 0.12);
 ">
-Aprende a <b>resolver ecuaciones en ℤ</b> (números enteros) paso a paso.
-Todas las soluciones son <b>enteras por construcción</b>.🎯 
+Aprende a <b>resolver ecuaciones en ℤ</b> (Números Enteros) Paso a Paso.
+Una ecuación es una igualdad algebraica en la que aparecen letras (incógnitas) con valor
+desconocido.
+• El grado de una ecuación viene dado por el exponente mayor de la incógnita. En este tema
+trabajamos con ecuaciones lineales (de grado 1) con una incógnita.
+• Solucionar una ecuación es encontrar el valor o valores de las incógnitas que transforman la
+ecuación en una identidad.🎯 
 
 <ul style="margin-top: 0.6rem; margin-bottom: 0.6rem;">
   <li><b>Fácil</b>: la incógnita aparece sola → 
